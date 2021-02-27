@@ -1,11 +1,12 @@
 ﻿<div class="top-row pl-4 navbar navbar-dark">
 	<a class="navbar-brand" href="">StoriesLibrary</a>
-	<button class="navbar-toggler" @onclick="ToggleNavMenu">
-		<span class="navbar-toggler-icon"></span>
+	<button class="navbar-toggler" @onclick="ToggleNavMenu" aria-label="@((collapseNavMenu ? "Expandir" : "Contraer") + " el menú de navegación")" aria-expanded="@(!collapseNavMenu ? "true" : "false")">
+		<span class="navbar-toggler-icon" aria-hidden="true"></span>
 	</button>
 </div>
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+	<nav aria-label="Menú de navegación principal">
 	<ul class="nav flex-column">
 		<li class="nav-item px-3">
 			<NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -29,6 +30,7 @@
 		</li>
 
 	</ul>
+		</nav>
 </div>
 
 @code {
