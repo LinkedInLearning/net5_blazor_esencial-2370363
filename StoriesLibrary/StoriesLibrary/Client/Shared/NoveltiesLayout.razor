@@ -1,0 +1,38 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+	<div class="sidebar">
+		<NavMenu />
+	</div>
+
+	<div class="main">
+
+		<div class="content px-4">
+			<main>
+				<h1>Novedades</h1>
+				<nav aria-label="Menú de navegación de novedades">
+					<ul class="nav flex-column">
+						<li class="nav-item px-3">
+							<NavLink class="nav-link" href="/novelties/today" Match="NavLinkMatch.All">
+								Novedades de hoy
+							</NavLink>
+						</li>
+						<li class="nav-item px-3">
+							<NavLink class="nav-link" href="/novelties/week" Match="NavLinkMatch.All">
+								Novedades de la semana
+							</NavLink>
+						</li>
+						<li class="nav-item px-3">
+							<NavLink class="nav-link" href="/novelties/month" Match="NavLinkMatch.All">
+								Novedades de este mes
+							</NavLink>
+						</li>
+
+					</ul>
+				</nav>
+
+				@Body
+			</main>
+		</div>
+	</div>
+</div>
