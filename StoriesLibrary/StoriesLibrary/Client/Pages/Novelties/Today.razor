@@ -1,30 +1,7 @@
 ﻿@page "/novelties/today/{PageNumber:int?}"
 @using StoriesLibrary.Shared
 <h2>Novedades de hoy, página @PageNumber</h2>
-<p>Novedades de hoy</p>
-<table>
-	<caption>Tabla con las novedades de hoy</caption>
-	<thead>
-		<tr>
-			<th>Título</th>
-			<th>Autor</th>
-			<th>Fecha</th>
-			<th>Categoría</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var story in stories)
-		{
-			<tr>
-				<td>@story.Title</td>
-				<td>@story.Author</td>
-				<td>@story.PublishedDate.ToString("dd/MM/yyyy HH:mm")</td>
-				<td>@story.Category</td>
-			</tr>
-		}
-	</tbody>
-</table>
-
+<StoriesTable Caption="Tabla con las novedades de hoy" Stories=stories" />
 @code
 {
 
