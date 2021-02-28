@@ -1,3 +1,14 @@
-﻿@page "/novelties/today"
-<h2>Novedades de hoy</h2>
+﻿@page "/novelties/today/{PageNumber:int?}"
+<h2>Novedades de hoy, página @PageNumber</h2>
 <p>Aquí irán las novedades de hoy.</p>
+@code
+{
+
+	[Parameter]
+	public int? PageNumber { get; set; }
+
+	protected override void OnParametersSet()
+	{
+		PageNumber = PageNumber ?? 1;
+	}
+}
