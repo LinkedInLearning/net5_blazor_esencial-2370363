@@ -20,6 +20,9 @@ namespace StoriesLibrary.Client.Pages.Novelties
 		[Parameter]
 		public int? PageNumber { get; set; }
 
+		[CascadingParameter]
+		private int numberOfStories { get; set; }
+
 		public override Task SetParametersAsync(ParameterView parameters)
 		{
 			logger.LogInformation("Se ha llamado a SetParametersAsync. Se van a ajustar los parámetros del componente. Llamando a la implementación base...");

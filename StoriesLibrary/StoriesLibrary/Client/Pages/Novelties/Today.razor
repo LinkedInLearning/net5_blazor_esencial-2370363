@@ -1,6 +1,7 @@
 ﻿@page "/novelties/today/{PageNumber:int?}"
 @using StoriesLibrary.Shared
-<h2>Novedades de hoy, página @PageNumber</h2>
+<h2 class="">Novedades de hoy, página @PageNumber</h2>
+<p>¡Ya tenemos en nuestra base de datos la friolera de @numberOfStories historias!</p>
 @if (_stories == null)
 {
 	<p>Cargando historias...</p>
