@@ -1,0 +1,22 @@
+﻿<table>
+	<caption>@Caption</caption>
+	<thead>
+		<tr>
+			<th>Título</th>
+			<th>Autor</th>
+			<th>Fecha de publicación</th>
+			<th>Categoría</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var story in Stories.OrderBy(h => h.PublishedDate))
+		{
+			<tr>
+				<td>@story.Title</td>
+				<td>@story.Author</td>
+				<td>@story.PublishedDate.ToString("dd/MM/yyy HH:mm")</td>
+				<td>@story.Category</td>
+			</tr>
+		}
+	</tbody>
+</table>
