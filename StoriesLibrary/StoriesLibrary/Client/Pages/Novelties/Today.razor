@@ -1,4 +1,10 @@
 ﻿@page "/novelties/today/{PageNumber:int?}"
 <h2>Novedades de hoy, página @PageNumber</h2>
-<StoriesTable Caption="Tabla de historias añadidas hoy" Stories="@stories" />
-
+@if (_stories == null)
+{
+	<p>Cargando tabla de historias...</p>
+}
+else
+{
+	<StoriesTable Caption="Tabla de historias añadidas hoy" Stories="@_stories" />
+}
