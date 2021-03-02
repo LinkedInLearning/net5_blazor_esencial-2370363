@@ -1,22 +1,49 @@
-﻿<table>
-	<caption>@Caption</caption>
-	<thead>
-		<tr>
-			<th>Título</th>
-			<th>Autor</th>
-			<th>Fecha de publicación</th>
-			<th>Categoría</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var story in Stories.OrderBy(h => h.PublishedDate))
-		{
+﻿<div role="search">
+	<div class="form-group">
+		<label for="txtSearch">Buscar historias:</label>
+		<input type="text" class="form-control" id="txtSearch" @bind="searchField" @ref="searchInput" />
+	</div>
+	<button class="btn-primary" @onclick="PerformSearch">Buscar</button>
+	<button id="btnToggleRecentSearches" class="btn-secondary" @onclick="ToggleRecentSearches" aria-expanded="@(recentSearchesExpanded ? "true" : "false")" aria-controls="@(recentSearchesExpanded ? "pnlRecentSearches" : null)">Búsquedas recientes</button>
+</div>
+@if (recentSearchesExpanded)
+{
+	<div id="pnlRecentSearches" role="group" aria-labelledby="btnToggleRecentSearches">
+		<ul>
+			@foreach (var search in recentSearches)
+			{
+				<li><button @onclick="(async () => await SetRecentSearchAsync(search))" aria-label="Buscar @search" disabled="@(searchField == search)">@search</button></li>
+			}
+		</ul>
+	</div>
+}
+@if (!filteredResults.Any())
+{
+	<p role="alert">No se encontraron resultados para el texto @textToFilter.</p>
+}
+else
+{
+	<p role="alert">Se han encontrado @filteredResults.Count resultados.</p>
+	<table>
+		<caption>@captionWithFilter</caption>
+		<thead>
 			<tr>
-				<td>@story.Title</td>
-				<td>@story.Author</td>
-				<td>@story.PublishedDate.ToString("dd/MM/yyy HH:mm")</td>
-				<td>@story.Category</td>
+				<th>Título</th>
+				<th>Autor</th>
+				<th>Fecha de publicación</th>
+				<th>Categoría</th>
 			</tr>
-		}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			@foreach (var story in filteredResults.OrderBy(h => h.PublishedDate))
+			{
+				<tr>
+					<td>@story.Title</td>
+					<td>@story.Author</td>
+					<td>@story.PublishedDate.ToString("dd/MM/yyy HH:mm")</td>
+					<td>@story.Category</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
