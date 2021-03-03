@@ -9,7 +9,9 @@
 
 		<div class="content px-4">
 			<main>
-				@Body
+				<CascadingValue Value="numberOfSubscribers" Name="numberOfSubscribers">
+					@Body
+				</CascadingValue>
 			</main>
 		</div>
 	</div>
