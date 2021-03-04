@@ -1,22 +1,20 @@
-﻿<div role="search">
+﻿<h3>Filtrar historias</h3><div role="search">
 	<div class="form-group">
 		<label for="txtSearch">Buscar historias:</label>
-		<input type="text" class="form-control" id="txtSearch" @bind="searchField" @ref="searchInput" />
+		<input type="text" class="form-control" id="txtSearch" @bind="searchField" />
 	</div>
 	<button class="btn-primary" @onclick="PerformSearch">Buscar</button>
-	<button id="btnToggleRecentSearches" class="btn-secondary" @onclick="ToggleRecentSearches" aria-expanded="@(recentSearchesExpanded ? "true" : "false")" aria-controls="@(recentSearchesExpanded ? "pnlRecentSearches" : null)">Búsquedas recientes</button>
 </div>
-@if (recentSearchesExpanded)
-{
-	<div id="pnlRecentSearches" role="group" aria-labelledby="btnToggleRecentSearches">
-		<ul>
-			@foreach (var search in recentSearches)
-			{
-				<li><button @onclick="(async () => await SetRecentSearchAsync(search))" aria-label="Buscar @search" disabled="@(searchField == search)">@search</button></li>
-			}
-		</ul>
-	</div>
-}
+<h4 id="hRecentSearches">Búsquedas recientes</h4>
+<div id="pnlRecentSearches" role="group" aria-labelledby="hRecentSearches">
+	<ul>
+		@foreach (var search in recentSearches)
+		{
+			<li><button @onclick="(() => SetRecentSearch(search))" aria-label="Buscar @search" disabled="@(searchField == search)">@search</button></li>
+		}
+	</ul>
+</div>
+<h3>Historias encontradas</h3>
 @if (!filteredResults.Any())
 {
 	<p role="alert">No se encontraron resultados para el texto @textToFilter.</p>

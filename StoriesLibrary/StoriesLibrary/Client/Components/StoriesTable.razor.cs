@@ -12,26 +12,22 @@ namespace StoriesLibrary.Client.Components
 	public partial class StoriesTable
 	{
 
-		private bool recentSearchesExpanded = false;
-
 		private List<string> recentSearches = new List<string> { "terror", "dientes", "gato", "perro", "comedia" };
 
 		private string searchField;
 
 		private string textToFilter;
 
-		private ElementReference searchInput;
-
 		private List<Story> filteredResults;
 
-		private string captionWithFilter => Caption + (!string.IsNullOrWhiteSpace(searchField) ? $". Filtrando por el texto \"{searchField}." : "");
+		private string captionWithFilter => Caption + (!string.IsNullOrWhiteSpace(textToFilter) ? $". Filtrando por el texto \"{textToFilter}." : "");
 
 		[Parameter]
 		public List<Story> Stories { get; set; }
 
-
 		[Parameter]
 		public string Caption { get; set; }
+		
 		protected override void OnParametersSet()
 		{
 			filteredResults = Stories;
@@ -52,16 +48,9 @@ namespace StoriesLibrary.Client.Components
 		}
 		}
 
-		private void ToggleRecentSearches()
-		{
-			recentSearchesExpanded = !recentSearchesExpanded;
-		}
-
-		private async Task SetRecentSearchAsync(string text)
+		private async Task SetRecentSearch(string text)
 		{
 			searchField = text;
-			recentSearchesExpanded = false;
-			await searchInput.FocusAsync();
 		}
 	}
 }
