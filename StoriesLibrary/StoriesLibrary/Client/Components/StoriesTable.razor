@@ -1,22 +1,48 @@
-﻿<table>
-	<caption>@Caption</caption>
-	<thead>
-		<tr>
-			<th>Título</th>
-			<th>Autor</th>
-			<th>Fecha de publicación</th>
-			<th>Categoría</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var story in Stories.OrderBy(h => h.PublishedDate))
-		{
+﻿<h3>Filtrar historias</h3>
+<div role="search">
+	<div class="form-group">
+		<label for="txtSearch">Buscar historias:</label>
+		<input type="text" class="form-control" id="txtSearch" @bind="searchField" />
+	</div>
+	<button class="btn-primary" @onclick="PerformSearch">Buscar</button>
+	<h4 id="hRecentSearches">Búsquedas recientes</h4>
+	<div id="pnlRecentSearches" role="group" aria-labelledby="hRecentSearches">
+		<ul>
+			@foreach (var search in recentSearches)
+			{
+				<li><button @onclick="(() => SetRecentSearch(search))" aria-label="Buscar @search" disabled="@(searchField == search)">@search</button></li>
+			}
+		</ul>
+	</div>
+</div>
+<h3>Historias encontradas</h3>
+@if (!filteredResults.Any())
+{
+	<p role="alert">No se encontraron resultados para el texto @textToFilter.</p>
+}
+else
+{
+	<p role="alert">Se han encontrado @filteredResults.Count resultados.</p>
+	<table>
+		<caption>@captionWithFilter</caption>
+		<thead>
 			<tr>
-				<td>@story.Title</td>
-				<td>@story.Author</td>
-				<td>@story.PublishedDate.ToString("dd/MM/yyy HH:mm")</td>
-				<td>@story.Category</td>
+				<th>Título</th>
+				<th>Autor</th>
+				<th>Fecha de publicación</th>
+				<th>Categoría</th>
 			</tr>
-		}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			@foreach (var story in filteredResults.OrderBy(h => h.PublishedDate))
+			{
+				<tr>
+					<td>@story.Title</td>
+					<td>@story.Author</td>
+					<td>@story.PublishedDate.ToString("dd/MM/yyy HH:mm")</td>
+					<td>@story.Category</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
