@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
+using StoriesLibrary.Client.Config;
 using StoriesLibrary.Shared;
 
 using System;
@@ -21,6 +22,9 @@ namespace StoriesLibrary.Client.Components
 		private List<Story> filteredResults;
 
 		private string captionWithFilter => Caption + (!string.IsNullOrWhiteSpace(textToFilter) ? $". Filtrando por el texto \"{textToFilter}." : "");
+		[Inject]
+		private PaginationConfig paginationConfig { get; set; }
+
 
 		[Parameter]
 		public List<Story> Stories { get; set; }
