@@ -10,7 +10,7 @@ namespace StoriesLibrary.Client.Pages
 	public partial class Index
 	{
 
-		[CascadingParameter(Name = "numberOfStories")]
+		[CascadingParameter(Name = "numberOfSubscribers")]
 		private int numberOfStories { get; set; }
 
 	}
