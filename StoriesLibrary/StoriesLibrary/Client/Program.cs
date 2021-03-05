@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using StoriesLibrary.Client.Config;
 using StoriesLibrary.Client.Services;
 
 using System;
@@ -22,8 +23,15 @@ namespace StoriesLibrary.Client
 
 			builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 			builder.Services.AddSingleton<IStoriesService, StoriesService>();
-
+			AddConfig(builder);
 			await builder.Build().RunAsync();
+		}
+
+		private static void AddConfig(WebAssemblyHostBuilder builder)
+		{
+			var paginationConfig = new PaginationConfig();
+			builder.Configuration.GetSection("pagination").Bind(paginationConfig);
+			builder.Services.AddSingleton(paginationConfig);
 		}
 	}
 }
