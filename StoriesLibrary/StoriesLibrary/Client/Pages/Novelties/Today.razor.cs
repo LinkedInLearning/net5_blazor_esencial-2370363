@@ -15,6 +15,8 @@ namespace StoriesLibrary.Client.Pages.Novelties
 	{
 		private List<Story> _stories;
 
+		private bool errorsWhenLoading = false;
+
 		[Inject]
 		private ILogger<Today> logger { get; set; }
 
@@ -33,7 +35,14 @@ namespace StoriesLibrary.Client.Pages.Novelties
 		protected override async Task OnInitializedAsync()
 		{
 			logger.LogInformation("Se ha llamado a OnInitializedAsync. El componente se acaba de iniciar.");
-			_stories = storiesService.GetNovelties(StoriesService.NoveltiesScope.Today);
+			try
+			{
+				_stories = storiesService.GetNovelties(StoriesService.NoveltiesScope.Today);
+			}
+			catch (Exception ex)
+			{
+				errorsWhenLoading = true;
+			}
 		}
 
 		protected override void OnParametersSet()

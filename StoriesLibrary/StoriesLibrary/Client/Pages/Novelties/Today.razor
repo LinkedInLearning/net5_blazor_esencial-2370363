@@ -2,8 +2,16 @@
 <h2>Novedades de hoy, página @PageNumber</h2>
 @if (_stories == null)
 {
+	@if (errorsWhenLoading)
+	{
+		<p>Error al cargar la tabla de historias.</p>
+	}
+	else
+	{
+
 	<p>Cargando tabla de historias...</p>
-}
+		}
+	}
 else
 {
 	<StoriesTable Caption="Tabla de historias añadidas hoy" Stories="@_stories" />
