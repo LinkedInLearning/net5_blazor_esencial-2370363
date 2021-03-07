@@ -18,8 +18,7 @@ namespace StoriesLibrary.Client.Services
 
 		public List<Story> GetNovelties(NoveltiesScope scope)
 		{
-			/*
-			 * return new List<Story>
+			 return new List<Story>
 			{
 				new Story { Title = "Los ángulos tienen dientes", Author = "Eva Artés", PublishedDate = new DateTime(2021, 2, 28, 13, 22, 51), Category = "terror" },
 				new Story { Title = "La gasolinera", Author = "Raquel Sastre", PublishedDate = new DateTime(2021, 2, 28, 14, 22, 51), Category = "novela" },
@@ -43,9 +42,6 @@ namespace StoriesLibrary.Client.Services
 				new Story { Title = "Durmiendo", Author = "Roberto Masip", PublishedDate = new DateTime(2021, 2, 28, 7, 22, 51), Category = "novela" },
 				new Story { Title = "La mirada vacía", Author = "Juan María Martín", PublishedDate = new DateTime(2021, 2, 28, 8, 22, 51), Category = "ciencia ficción" }
 			};
-			*/
-			throw new Exception("¡Otra sorpresa!");
-
 		}
 
 	}
