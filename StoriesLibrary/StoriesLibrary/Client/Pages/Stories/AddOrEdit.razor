@@ -1,6 +1,7 @@
 ﻿<div class="form-group">
 	<label for="txtTitle">Título (*)</label>
-	<EnhancedInput id="txtTitle" class="form-control" />
+	<EnhancedInput id="txtTitle" class="form-control" MaxLength="100"  OnFillingPercentageChanged="FillingPercentageChanged"/>
+	<progress value="@percentage" max="100"></progress>
 </div>
 <div class="form-group">
 	<label for="txtText">Texto de la historia (*)</label>

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 
+using StoriesLibrary.Client.Entities;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +18,14 @@ namespace StoriesLibrary.Client.Pages.Stories
 			Edit
 		}
 
+		private int percentage;
+
 		[Parameter]
 		public FormMode Mode { get; set; }
 
+		private void FillingPercentageChanged(FillingPercentageChangedEventArgs e)
+		{
+			percentage = e.FillingPercentage;
+		}
 	}
 }
