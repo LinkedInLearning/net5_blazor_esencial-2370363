@@ -34,15 +34,16 @@ namespace StoriesLibrary.Client.Pages.Novelties
 			return base.SetParametersAsync(parameters);
 		}
 
-		protected override async Task OnInitializedAsync()
+		protected override void OnInitialized()
 		{
-			logger.LogInformation("Se ha llamado a OnInitializedAsync. El componente se acaba de iniciar.");
+			logger.LogInformation("Se ha llamado a OnInitialized. El componente se acaba de iniciar.");
 			try
 			{
 				_stories = storiesService.GetNovelties(StoriesService.NoveltiesScope.Today);
 			}
 			catch (Exception ex)
 			{
+				logger.LogError(ex, "Error hwen loading stories.");
 				errorsWhenLoading = true;
 			}
 		}
