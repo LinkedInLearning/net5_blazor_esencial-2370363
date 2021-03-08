@@ -22,15 +22,18 @@ namespace StoriesLibrary.Client.Components
 		private List<Story> filteredResults;
 
 		private string captionWithFilter => Caption + (!string.IsNullOrWhiteSpace(textToFilter) ? $". Filtrando por el texto \"{textToFilter}." : "");
+
 		[Inject]
 		private PaginationConfig paginationConfig { get; set; }
-
 
 		[Parameter]
 		public List<Story> Stories { get; set; }
 
 		[Parameter]
 		public string Caption { get; set; }
+
+		[Parameter]
+		public EventCallback<Story> OnStorySelect { get; set; }
 
 		protected override void OnParametersSet()
 		{
@@ -56,5 +59,7 @@ namespace StoriesLibrary.Client.Components
 		{
 			searchField = text;
 		}
+
+		private Task SelectStory(Story story) => OnStorySelect.InvokeAsync(story);
 	}
 }

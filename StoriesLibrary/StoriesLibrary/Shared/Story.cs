@@ -9,6 +9,8 @@ namespace StoriesLibrary.Shared
 	public class Story
 	{
 
+		public int Id { get; set; }
+
 		public string Title { get; set; }
 
 		public string Author { get; set; }
@@ -16,6 +18,8 @@ namespace StoriesLibrary.Shared
 		public DateTime PublishedDate { get; set; }
 
 		public string Category { get; set; }
+
+		public string Text { get; set; }
 
 	}
 }

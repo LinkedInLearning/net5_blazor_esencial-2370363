@@ -13,5 +13,9 @@
 	}
 else
 {
-	<StoriesTable Caption="Tabla de historias añadidas hoy" Stories="@_stories" />
+	<StoriesTable Caption="Tabla de historias añadidas hoy" Stories="@_stories" OnStorySelect="LoadStoryDetails" />
+@if (selectedStory != null)
+{
+	<StoryDetails Story="selectedStory" />
+	}
 }

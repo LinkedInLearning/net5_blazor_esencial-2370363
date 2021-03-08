@@ -38,7 +38,7 @@ else
 			@foreach (var story in filteredResults.OrderBy(h => h.PublishedDate))
 			{
 				<tr>
-					<td>@story.Title</td>
+					<td><a href="#" @onclick="@(() => SelectStory(story))" @onclick:preventDefault="true"> @story.Title</a></td>
 					<td>@story.Author</td>
 					<td>@story.PublishedDate.ToString("dd/MM/yyy HH:mm")</td>
 					<td>@story.Category</td>

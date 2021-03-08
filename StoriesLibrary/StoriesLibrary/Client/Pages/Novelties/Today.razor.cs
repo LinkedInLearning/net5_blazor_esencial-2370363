@@ -17,6 +17,8 @@ namespace StoriesLibrary.Client.Pages.Novelties
 
 		private bool errorsWhenLoading = false;
 
+		private Story selectedStory;
+
 		[Inject]
 		private ILogger<Today> logger { get; set; }
 
@@ -55,6 +57,11 @@ namespace StoriesLibrary.Client.Pages.Novelties
 		{
 			logger.LogInformation($"El componente se acaba de renderizar. firstRender = {firstRender}.");
 			return Task.CompletedTask;
+		}
+
+		private void LoadStoryDetails(Story story)
+		{
+			selectedStory = story;
 		}
 	}
 }
