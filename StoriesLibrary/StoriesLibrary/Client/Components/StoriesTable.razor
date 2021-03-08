@@ -42,7 +42,7 @@ else
 			@HeaderTemplate
 		}
 		<tbody>
-			<Virtualize Items="filteredResults" Context="story">
+			<Virtualize Context="story" ItemsProvider="@LoadStories">
 				<ItemContent>
 					@if (RowTemplate is null)
 					{

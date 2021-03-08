@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 using StoriesLibrary.Client.Config;
 using StoriesLibrary.Shared;
@@ -69,6 +70,13 @@ namespace StoriesLibrary.Client.Components
 		private void SetRecentSearch(string text)
 		{
 			searchField = text;
+		}
+
+		private async ValueTask<ItemsProviderResult<Story>> LoadStories(ItemsProviderRequest request)
+		{
+			var storiesToTake = Math.Min(request.Count, filteredResults.Count - request.StartIndex);
+			var storiesToShow = filteredResults.Skip(request.StartIndex).Take(storiesToTake);
+			return new ItemsProviderResult<Story>(storiesToShow, filteredResults.Count);
 		}
 
 		private Task SelectStory(Story story) => OnStorySelect.InvokeAsync(story);
