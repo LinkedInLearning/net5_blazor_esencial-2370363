@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
+using StoriesLibrary.Client.Components;
 using StoriesLibrary.Client.Services;
 using StoriesLibrary.Shared;
 
@@ -13,9 +14,12 @@ namespace StoriesLibrary.Client.Pages.Admin.Stories
 	public partial class Index
 	{
 		private List<Story> stories;
-		
+
+		private Story selectedStory;
+
 		[Inject]
 		private IStoriesService storiesService { get; set; }
+
 
 		protected override void OnInitialized()
 		{
@@ -30,5 +34,9 @@ namespace StoriesLibrary.Client.Pages.Admin.Stories
 		{
 		}
 
+		private void LoadStoryDetails(Story story)
+		{
+			selectedStory = story;
+		}
 	}
 }
