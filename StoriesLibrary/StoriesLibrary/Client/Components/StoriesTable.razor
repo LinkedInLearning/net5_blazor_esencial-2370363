@@ -55,13 +55,13 @@ else
 					}
 					else
 					{
-						@RowTemplate(story)
+						@RowTemplate((story, this))
 					}
 				</ItemContent>
 				<Placeholder>
-		<td colspan="@placeholderColspan">Cargando...</td>
-		</Placeholder>
-		</Virtualize>
+					<td colspan="@placeholderColspan">Cargando...</td>
+				</Placeholder>
+			</Virtualize>
 		</tbody>
 	</table>
 }

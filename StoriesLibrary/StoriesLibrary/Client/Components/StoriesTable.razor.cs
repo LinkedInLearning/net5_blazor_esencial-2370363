@@ -41,7 +41,7 @@ namespace StoriesLibrary.Client.Components
 		public RenderFragment HeaderTemplate { get; set; }
 
 		[Parameter]
-		public RenderFragment<Story> RowTemplate { get; set; }
+		public RenderFragment<(Story Story, StoriesTable Table)> RowTemplate { get; set; }
 
 		[Parameter]
 		public EventCallback<Story> OnStorySelect { get; set; }
@@ -71,6 +71,6 @@ namespace StoriesLibrary.Client.Components
 			searchField = text;
 		}
 
-		private Task SelectStory(Story story) => OnStorySelect.InvokeAsync(story);
+		public Task SelectStory(Story story) => OnStorySelect.InvokeAsync(story);
 	}
 }
