@@ -90,7 +90,8 @@ namespace StoriesLibrary.Client.Services
 				Title = string.Join(" ", randomTitle),
 				Author = string.Join(" ", randomAuthor),
 				Category = "random",
-				PublishedDate = new DateTime(2021, rnd.Next(1, 13), rnd.Next(1, 29), rnd.Next(0, 24), rnd.Next(0, 60), 0)
+				PublishedDate = new DateTime(2021, rnd.Next(1, 13), rnd.Next(1, 29), rnd.Next(0, 24), rnd.Next(0, 60), 0),
+				Text = $"Random text{Environment.NewLine}Otro texto random."
 			};
 		}
 

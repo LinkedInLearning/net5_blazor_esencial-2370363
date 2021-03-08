@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
-@inject IWebAssemblyHostEnvironment hostEnvironment 
+@inject IServiceProvider serviceProvider
 <footer class="footer">
 	<div class="container">
-		<p>&copy; Stories Library @DateTime.Now.Year (@hostEnvironment.Environment)</p>
+		<p>&copy; Stories Library @DateTime.Now.Year</p>
 		@ChildContent
 	</div>
 </footer>

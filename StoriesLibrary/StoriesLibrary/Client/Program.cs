@@ -19,7 +19,8 @@ namespace StoriesLibrary.Client
 		public static async Task Main(string[] args)
 		{
 			var builder = WebAssemblyHostBuilder.CreateDefault(args);
-			builder.RootComponents.Add<App>("#app");
+			// builder.RootComponents.Add<App>("#app");
+			// ¡nunca dejes código comentado! ¡Solo para propósitos de muestra! ;)
 			builder.Logging.AddConfiguration(builder.Configuration.GetSection("Loggin"));
 			builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 			builder.Services.AddSingleton<IStoriesService, StoriesService>();
