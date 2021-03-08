@@ -23,6 +23,8 @@ namespace StoriesLibrary.Client.Components
 
 		private string captionWithFilter => Caption + (!string.IsNullOrWhiteSpace(textToFilter) ? $". Filtrando por el texto \"{textToFilter}." : "");
 
+		private int placeholderColspan => RowTemplate is null ? 4 : NumberOfColumns;
+
 		[Inject]
 		private PaginationConfig paginationConfig { get; set; }
 
@@ -31,6 +33,9 @@ namespace StoriesLibrary.Client.Components
 
 		[Parameter]
 		public string Caption { get; set; }
+
+		[Parameter]
+		public int NumberOfColumns { get; set; }
 
 		[Parameter]
 		public RenderFragment HeaderTemplate { get; set; }

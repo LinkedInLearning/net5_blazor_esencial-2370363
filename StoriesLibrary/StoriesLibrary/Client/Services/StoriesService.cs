@@ -43,15 +43,64 @@ namespace StoriesLibrary.Client.Services
 				new Story { Id = 19, Title = "Los gatos también ladran", Author = "Rosa Ramos", PublishedDate = new DateTime(2021, 2, 28, 6, 22, 51), Category = "ciencia ficción" , Text = $"Línea 1{Environment.NewLine}Línea 2" },
 				new Story { Id = 20, Title = "Durmiendo", Author = "Roberto Masip", PublishedDate = new DateTime(2021, 2, 28, 7, 22, 51), Category = "novela" , Text = $"Línea 1{Environment.NewLine}Línea 2" },
 				new Story { Id = 21, Title = "La mirada vacía", Author = "Juan María Martín", PublishedDate = new DateTime(2021, 2, 28, 8, 22, 51), Category = "ciencia ficción", Text = $"Línea 1{Environment.NewLine}Línea 2" }
-			};
+			}.OrderByDescending(s => s.PublishedDate).ToList();
 		}
-		
+
 		public List<Story> GetNovelties(NoveltiesScope scope)
 		{
 			return stories;
 		}
 
-		public List<Story> GetAll() => stories;
+		public List<Story> GetAll()
+		{
+			var inventedStories = stories.ToList();
+			var words = stories.SelectMany(s => s.Title.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(w => w.Trim(new[] { ',', '.' }))).Distinct();
+			var authorNames = stories.Select(s => s.Author.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].Trim(new[] { ',', '.' }));
+			var authorLastNames = stories.SelectMany(s => s.Author.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1..].Select(w => w.Trim(new[] { ',', '.' }))).Where(w => !new[] { "de", "la" }.Contains(w)).Distinct();
+			int initialRange = stories.Count + 1, finalRange = 300;
+			foreach (var i in Enumerable.Range(initialRange, finalRange))
+			{
+				inventedStories.Add(GenerateStory(i, words, authorNames, authorLastNames));
+			}
+			return inventedStories.OrderByDescending(s => s.PublishedDate).ToList();
+		}
 
+		private Story GenerateStory(int storyId, IEnumerable<string> words, IEnumerable<string> authorNames, IEnumerable<string> authorLastNames)
+		{
+			var wordsCopy = words.ToList();
+			var authorNamesCopy = authorNames.ToList();
+			var authorLastNamesCopy = authorLastNames.ToList();
+			int minWordsInTitle = 3, maxWordsInTitle = 10;
+			var rnd = new Random();
+			var wordsInTitle = rnd.Next(minWordsInTitle, maxWordsInTitle + 1);
+			var randomTitle = new List<string>();
+
+			for (var i = 0; i < wordsInTitle; i++)
+			{
+				var word = ExtractRandomWord(wordsCopy);
+				randomTitle.Add(word);
+			}
+
+			var randomAuthor = new List<string>();
+			randomAuthor.Add(ExtractRandomWord(authorNamesCopy));
+			randomAuthor.Add(ExtractRandomWord(authorLastNamesCopy));
+			randomAuthor.Add(ExtractRandomWord(authorLastNamesCopy));
+			return new Story {
+				Id = storyId,
+				Title = string.Join(" ", randomTitle),
+				Author = string.Join(" ", randomAuthor),
+				Category = "random",
+				PublishedDate = new DateTime(2021, rnd.Next(1, 13), rnd.Next(1, 29), rnd.Next(0, 24), rnd.Next(0, 60), 0)
+			};
+		}
+
+		private static string ExtractRandomWord(List<string> wordList)
+		{
+			var rnd = new Random();
+			var index = rnd.Next(0, wordList.Count);
+			var word = wordList[index];
+			wordList.RemoveAt(index);
+			return word;
+		}
 	}
 }
