@@ -1,5 +1,7 @@
 ﻿@page "/novelties/today/{PageNumber:int?}"
 <h2>Novedades de hoy, página @PageNumber</h2>
+<div>
+<p>Un párrafo de ejemplo que debería mostrarse en rojo.</p>
 @if (_stories == null)
 {
 	@if (errorsWhenLoading)
@@ -8,14 +10,15 @@
 	}
 	else
 	{
-	<p>Cargando tabla de historias...</p>
-		}
+		<p>Cargando tabla de historias...</p>
 	}
+}
 else
 {
 	<StoriesTable Caption="Tabla de historias añadidas hoy" Stories="@_stories" OnStorySelect="LoadStoryDetails" />
-@if (selectedStory != null)
-{
-	<StoryDetails Story="selectedStory" />
+	@if (selectedStory != null)
+	{
+		<StoryDetails Story="selectedStory" />
 	}
 }
+	</div>
