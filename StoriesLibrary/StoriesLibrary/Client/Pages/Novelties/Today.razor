@@ -1,24 +1,25 @@
 ﻿@page "/novelties/today/{PageNumber:int?}"
 <h2>Novedades de hoy, página @PageNumber</h2>
 <div>
-<p>Un párrafo de ejemplo que debería mostrarse en rojo.</p>
-@if (_stories == null)
-{
-	@if (errorsWhenLoading)
+	<p>Un párrafo de ejemplo que debería mostrarse en rojo.</p>
+	@if (_stories == null)
 	{
-		<p>Error al cargar la tabla de historias.</p>
+		@if (errorsWhenLoading)
+		{
+			<p>Error al cargar la tabla de historias.</p>
+		}
+		else
+		{
+			<p>Cargando tabla de historias...</p>
+		}
 	}
 	else
 	{
-		<p>Cargando tabla de historias...</p>
+		<StoriesTable Caption="Tabla de historias añadidas hoy" Stories="@_stories" OnStorySelect="LoadStoryDetails" />
+		@if (selectedStory != null)
+		{
+			<AudioMessage Type="AudioMessage.MessageType.Warning" @ref="audioMessageRef" />
+			<StoryDetails Story="selectedStory" />
+		}
 	}
-}
-else
-{
-	<StoriesTable Caption="Tabla de historias añadidas hoy" Stories="@_stories" OnStorySelect="LoadStoryDetails" />
-	@if (selectedStory != null)
-	{
-		<StoryDetails Story="selectedStory" />
-	}
-}
-	</div>
+</div>

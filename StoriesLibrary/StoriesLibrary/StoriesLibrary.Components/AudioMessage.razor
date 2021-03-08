@@ -1,0 +1,6 @@
+﻿<audio @ref=		"audioReference" @attributes="additionalAttributes">
+	@foreach (var sourceType in sourceTypes)
+	{
+		<source src="./_content/StoriesLibrary.Components/sounds/@audioSource.@sourceType.Key" type="@sourceType.Value" data-rnd="@Guid.NewGuid()"/>
+	}
+</audio>
