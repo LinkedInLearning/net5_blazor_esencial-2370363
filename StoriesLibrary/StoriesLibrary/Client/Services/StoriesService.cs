@@ -50,5 +50,8 @@ namespace StoriesLibrary.Client.Services
 		{
 			return stories;
 		}
+
+		public List<Story> GetAll() => stories;
+
 	}
 }

@@ -1,0 +1,24 @@
+﻿@page "/admin/stories/"
+@page "/admin/stories/index"
+<h2>Listado de historias</h2>
+<StoriesTable Caption="Lista de historias dadas de alta en la aplicación" Stories="stories">
+	<HeaderTemplate>
+		<thead>
+			<tr>
+				<th>Título</th>
+				<th>Autor</th>
+				<th>Categoría</th>
+				<th colspan="2">Acciones</th>
+			</tr>
+		</thead>
+	</HeaderTemplate>
+	<RowTemplate Context="story">
+		<tr>
+			<td>@story.Title</td>
+			<td>@story.Author</td>
+			<td>@story.Category</td>
+			<td><a href="#" @onclick="@(() => EditStory(story))" @onclick:preventDefault="true" aria-label="Editar @story.Title, de @story.Author">Editar</a></td>
+			<td><a href="#" @onclick="@(() => DeleteStory(story))" @onclick:preventDefault="true" aria-label="Borrar @story.Title, de @story.Author">Borrar</a></td>
+		</tr>
+	</RowTemplate>
+</StoriesTable>

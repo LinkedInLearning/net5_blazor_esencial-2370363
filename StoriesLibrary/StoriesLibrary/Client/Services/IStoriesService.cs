@@ -8,5 +8,7 @@ namespace StoriesLibrary.Client.Services
 	public interface IStoriesService
 	{
 		List<Story> GetNovelties(StoriesService.NoveltiesScope scope);
+		List<Story> GetAll();
+
 	}
 }

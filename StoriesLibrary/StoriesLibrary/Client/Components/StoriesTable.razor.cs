@@ -33,6 +33,12 @@ namespace StoriesLibrary.Client.Components
 		public string Caption { get; set; }
 
 		[Parameter]
+		public RenderFragment HeaderTemplate { get; set; }
+
+		[Parameter]
+		public RenderFragment<Story> RowTemplate { get; set; }
+
+		[Parameter]
 		public EventCallback<Story> OnStorySelect { get; set; }
 
 		protected override void OnParametersSet()
