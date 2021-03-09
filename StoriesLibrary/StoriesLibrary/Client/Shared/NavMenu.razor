@@ -7,19 +7,24 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
 	<nav aria-label="Menú de navegación principal">
-	<ul class="nav flex-column">
-		<li class="nav-item px-3">
-			<NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-				<span class="oi oi-home" aria-hidden="true"></span>Inicio
-			</NavLink>
-		</li>
-		<li class="nav-item px-3">
-			<NavLink class="nav-link" href="novelties/today">
-				Novedades
-			</NavLink>
-		</li>
-	</ul>
-		</nav>
+		<ul class="nav flex-column">
+			<li class="nav-item px-3">
+				<NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+					<span class="oi oi-home" aria-hidden="true"></span>Inicio
+				</NavLink>
+			</li>
+			<li class="nav-item px-3">
+				<NavLink class="nav-link" href="admin/stories">
+					Administrar historias
+				</NavLink>
+			</li>
+			<li class="nav-item px-3">
+				<NavLink class="nav-link" href="novelties/today">
+					Novedades
+				</NavLink>
+			</li>
+		</ul>
+	</nav>
 </div>
 
 @code {
