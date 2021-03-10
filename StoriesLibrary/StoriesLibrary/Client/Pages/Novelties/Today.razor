@@ -18,7 +18,6 @@
 		<StoriesTable Caption="Tabla de historias añadidas hoy" Stories="@_stories" OnStorySelect="LoadStoryDetails" />
 		@if (selectedStory != null)
 		{
-			<AudioMessage Type="AudioMessage.MessageType.Warning" @ref="audioMessageRef" />
 			<StoryDetails Story="selectedStory" />
 		}
 	}

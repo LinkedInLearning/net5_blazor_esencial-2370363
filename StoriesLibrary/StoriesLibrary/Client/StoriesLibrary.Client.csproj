@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\StoriesLibrary.Shared.csproj" />
-    <ProjectReference Include="..\StoriesLibrary.Components\StoriesLibrary.Components.csproj" />
   </ItemGroup>
 
 </Project>

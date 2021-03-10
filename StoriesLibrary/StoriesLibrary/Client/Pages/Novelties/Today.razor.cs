@@ -2,12 +2,10 @@
 using Microsoft.Extensions.Logging;
 
 using StoriesLibrary.Client.Services;
-using StoriesLibrary.Components;
 using StoriesLibrary.Shared;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace StoriesLibrary.Client.Pages.Novelties
@@ -19,8 +17,6 @@ namespace StoriesLibrary.Client.Pages.Novelties
 		private bool errorsWhenLoading = false;
 
 		private Story selectedStory;
-
-		private AudioMessage audioMessageRef;
 
 		[Inject]
 		private ILogger<Today> logger { get; set; }
@@ -66,10 +62,6 @@ namespace StoriesLibrary.Client.Pages.Novelties
 		private async Task LoadStoryDetails(Story story)
 		{
 			selectedStory = story;
-			if (audioMessageRef != null)
-			{
-				await audioMessageRef.PlayAsync();
-			}
 		}
 	}
 }

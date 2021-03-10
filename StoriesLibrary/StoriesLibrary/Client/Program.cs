@@ -5,12 +5,9 @@ using Microsoft.Extensions.Logging;
 
 using StoriesLibrary.Client.Config;
 using StoriesLibrary.Client.Services;
-using StoriesLibrary.Components;
 
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StoriesLibrary.Client
@@ -34,7 +31,6 @@ namespace StoriesLibrary.Client
 			var paginationConfig = new PaginationConfig();
 			builder.Configuration.GetSection("Pagination").Bind(paginationConfig);
 			builder.Services.AddSingleton(paginationConfig);
-			builder.Services.AddSingleton<JSAudioInteropService>();
 		}
 	}
 }
