@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 
 using StoriesLibrary.Client.Services;
+using StoriesLibrary.Components;
 using StoriesLibrary.Shared;
 
 using System;
@@ -13,6 +14,8 @@ namespace StoriesLibrary.Client.Pages.Novelties
 	public partial class Today
 	{
 		private List<Story> _stories;
+
+		private AudioMessage audioMessageRef;
 
 		private bool errorsWhenLoading = false;
 
@@ -53,10 +56,13 @@ namespace StoriesLibrary.Client.Pages.Novelties
 			PageNumber = PageNumber ?? 1;
 		}
 
-		protected override Task OnAfterRenderAsync(bool firstRender)
+		protected override async Task OnAfterRenderAsync(bool firstRender)
 		{
 			logger.LogInformation($"El componente se acaba de renderizar. firstRender = {firstRender}.");
-			return Task.CompletedTask;
+			if (selectedStory != null && audioMessageRef != null)
+			{
+				await audioMessageRef.PlayAsync();
+			}
 		}
 
 		private async Task LoadStoryDetails(Story story)

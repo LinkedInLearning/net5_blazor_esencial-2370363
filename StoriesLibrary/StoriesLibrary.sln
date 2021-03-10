@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesLibrary.Shared", "St
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesLibrary.Tests", "StoriesLibrary\StoriesLibrary.Tests\StoriesLibrary.Tests.csproj", "{F798094C-E453-4BC3-932B-55A348710C7B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesLibrary.Components", "StoriesLibrary\StoriesLibrary.Components\StoriesLibrary.Components.csproj", "{F6BA4E1C-1255-4EA3-8E56-CC9B9EF53301}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F798094C-E453-4BC3-932B-55A348710C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F798094C-E453-4BC3-932B-55A348710C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F798094C-E453-4BC3-932B-55A348710C7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6BA4E1C-1255-4EA3-8E56-CC9B9EF53301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6BA4E1C-1255-4EA3-8E56-CC9B9EF53301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6BA4E1C-1255-4EA3-8E56-CC9B9EF53301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6BA4E1C-1255-4EA3-8E56-CC9B9EF53301}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

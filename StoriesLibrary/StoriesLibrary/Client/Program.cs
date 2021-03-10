@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 using StoriesLibrary.Client.Config;
 using StoriesLibrary.Client.Services;
+using StoriesLibrary.Components;
 
 using System;
 using System.Net.Http;
@@ -21,6 +22,8 @@ namespace StoriesLibrary.Client
 			builder.Logging.AddConfiguration(builder.Configuration.GetSection("Loggin"));
 			builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 			builder.Services.AddSingleton<IStoriesService, StoriesService>();
+			builder.Services.AddSingleton<JSAudioInteropService>();
+
 			AddConfiguration(builder);
 
 			await builder.Build().RunAsync();
