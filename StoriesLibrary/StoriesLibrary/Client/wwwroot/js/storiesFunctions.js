@@ -1,8 +1,9 @@
 ﻿window.playAudio = (audio) => { audio.play(); };
-window.setMessage = () =>
+window.setMessage = (componentRef) =>
 {
-	var value = DotNet.invokeMethodAsync('StoriesLibrary.Client', 'SetMessageFromCSharp', 'El mensaje lo ha enviado Javascript.').then((returnedValue) => {
-		returnedValue;
+	componentRef.invokeMethodAsync('SetMessageFromCSharp', 'El mensaje lo ha enviado Javascript.')
+		.then((returnedValue) => {
+			console.log("El texto devuelto desde .net es: " + returnedValue + ".");
 	});
-	console.log("El texto devuelto desde .net es: " + value + ".");
+	
 };
