@@ -21,9 +21,9 @@ namespace StoriesLibrary.Client.Pages.Admin.Stories
 		private IStoriesService storiesService { get; set; }
 
 
-		protected override void OnInitialized()
+		protected override async Task OnInitializedAsync()
 		{
-			stories = storiesService.GetAll();
+			stories = await storiesService.GetAllAsync();
 		}
 
 		private void EditStory(Story story)

@@ -2,13 +2,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StoriesLibrary.Client.Services
 {
 	public interface IStoriesService
 	{
-		List<Story> GetNovelties(StoriesService.NoveltiesScope scope);
-		List<Story> GetAll();
+		Task<List<Story>> GetNoveltiesAsync(StoriesService.NoveltiesScope scope);
+		Task<List<Story>> GetAllAsync();
 
 	}
 }

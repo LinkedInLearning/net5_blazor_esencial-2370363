@@ -22,7 +22,7 @@ namespace StoriesLibrary.Client
 			builder.RootComponents.Add<App>("#app");
 			builder.Logging.AddConfiguration(builder.Configuration.GetSection("Loggin"));
 			builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-			builder.Services.AddSingleton<IStoriesService, StoriesService>();
+			builder.Services.AddScoped<IStoriesService, StoriesService>();
 			builder.Services.AddBlazoredLocalStorage();
 			AddConfiguration(builder);
 

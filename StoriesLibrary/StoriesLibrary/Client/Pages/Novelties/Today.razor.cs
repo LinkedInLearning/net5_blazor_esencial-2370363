@@ -33,12 +33,12 @@ namespace StoriesLibrary.Client.Pages.Novelties
 			return base.SetParametersAsync(parameters);
 		}
 
-		protected override void OnInitialized()
+		protected override async Task OnInitializedAsync()
 		{
 			logger.LogInformation("Se ha llamado a OnInitialized. El componente se acaba de iniciar.");
 			try
 			{
-				_stories = storiesService.GetNovelties(StoriesService.NoveltiesScope.Today);
+				_stories = await storiesService.GetNoveltiesAsync(StoriesService.NoveltiesScope.Today);
 			}
 			catch (Exception ex)
 			{

@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using StoriesLibrary.Server.Services;
+
 using System.Linq;
 
 namespace StoriesLibrary.Server
@@ -26,6 +28,7 @@ namespace StoriesLibrary.Server
 
 			services.AddControllersWithViews();
 			services.AddRazorPages();
+			services.AddScoped<IStoriesService, StoriesService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
