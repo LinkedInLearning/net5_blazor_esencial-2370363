@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 
 using StoriesLibrary.Client.Services;
-using StoriesLibrary.Components;
 using StoriesLibrary.Shared;
 
 using System;
@@ -15,7 +14,6 @@ namespace StoriesLibrary.Client.Pages.Novelties
 	{
 		private List<Story> _stories;
 
-		private AudioMessage audioMessageRef;
 
 		private bool errorsWhenLoading = false;
 
@@ -59,10 +57,6 @@ namespace StoriesLibrary.Client.Pages.Novelties
 		protected override async Task OnAfterRenderAsync(bool firstRender)
 		{
 			logger.LogInformation($"El componente se acaba de renderizar. firstRender = {firstRender}.");
-			if (selectedStory != null && audioMessageRef != null)
-			{
-				await audioMessageRef.PlayAsync();
-			}
 		}
 
 		private async Task LoadStoryDetails(Story story)

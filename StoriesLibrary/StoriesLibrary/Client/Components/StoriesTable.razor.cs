@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
+using Microsoft.JSInterop;
 
 using StoriesLibrary.Client.Config;
 using StoriesLibrary.Shared;
@@ -29,6 +30,9 @@ namespace StoriesLibrary.Client.Components
 		[Inject]
 		private PaginationConfig paginationConfig { get; set; }
 
+		[Inject]
+		private IJSRuntime jSRuntime { get; set; }
+
 		[Parameter]
 		public List<Story> Stories { get; set; }
 
@@ -52,7 +56,7 @@ namespace StoriesLibrary.Client.Components
 			filteredResults = Stories;
 		}
 
-		private void PerformSearch()
+		private async Task PerformSearch()
 		{
 			textToFilter = searchField;
 			if (string.IsNullOrWhiteSpace(textToFilter))
@@ -64,6 +68,10 @@ namespace StoriesLibrary.Client.Components
 				filteredResults = Stories.Where(s => s.Title.Contains(textToFilter, StringComparison.InvariantCultureIgnoreCase)
 					|| s.Author.Contains(textToFilter, StringComparison.InvariantCultureIgnoreCase)
 					|| s.Category.Contains(textToFilter, StringComparison.InvariantCultureIgnoreCase)).ToList();
+			}
+			if (!filteredResults.Any())
+			{
+				await jSRuntime.InvokeVoidAsync("alert", "¡Pues no hay resultados!");
 			}
 		}
 

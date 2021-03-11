@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 
-using Moq;
 
 using StoriesLibrary.Client.Components;
 using StoriesLibrary.Client.Config;

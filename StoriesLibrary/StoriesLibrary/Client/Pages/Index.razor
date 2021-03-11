@@ -1,5 +1,12 @@
 ﻿@page "/"
 
 <h1>Bienvenido a la biblioteca de historias</h1>
+@if (!string.IsNullOrWhiteSpace(name))
+{
+	<p>¡Hola, @name!</p>
+}
 <p>Seas escritor o lector empedernido, esta es tu web. ¡Disfruta!</p>
 <p>¡Ya somos @numberOfStories suscriptores!!!!!!!!</p>
+<audio class="hide" @ref="audioRef">
+	<source src="/sounds/page-turnover.wav" />
+</audio>
