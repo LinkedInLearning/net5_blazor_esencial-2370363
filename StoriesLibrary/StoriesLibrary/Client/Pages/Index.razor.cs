@@ -21,12 +21,23 @@ namespace StoriesLibrary.Client.Pages
 
 		private ElementReference audioRef;
 
+		private static string message;
+
+		[JSInvokable]
+		public static string SetMessageFromCSharp(string newMessage)
+		{
+			message = newMessage;
+			return "¡Valor devuelto desde TestSetMessage en c#!";
+		}
+
 		protected override async Task OnAfterRenderAsync(bool firstRender)
 		{
 			if (firstRender)
 			{
 				name = await jsRuntime.InvokeAsync<string>("prompt", "¿Cómo te llamas?");
 				await jsRuntime.InvokeVoidAsync("playAudio", audioRef);
+				await jsRuntime.InvokeVoidAsync("setMessage");
+
 				StateHasChanged();
 			}
 		}

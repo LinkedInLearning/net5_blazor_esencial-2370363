@@ -5,6 +5,10 @@
 {
 	<p>¡Hola, @name!</p>
 }
+@if (!string.IsNullOrWhiteSpace(message))
+{
+	<p>El mensaje es: @message.</p>
+}
 <p>Seas escritor o lector empedernido, esta es tu web. ¡Disfruta!</p>
 <p>¡Ya somos @numberOfStories suscriptores!!!!!!!!</p>
 <audio class="hide" @ref="audioRef">
