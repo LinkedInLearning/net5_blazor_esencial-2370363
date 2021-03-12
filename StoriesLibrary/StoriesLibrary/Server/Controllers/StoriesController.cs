@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
+using StoriesLibrary.Server.Models;
 using StoriesLibrary.Server.Services;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,6 +38,14 @@ namespace StoriesLibrary.Server.Controllers
 				return BadRequest(ModelState);
 			}
 			return Ok(storiesService.GetNovelties(parsedScope));
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Post([FromForm] UPloadStoryModel model)
+		{
+			using var fileStream = System.IO.File.OpenWrite(Path.Combine(Directory.GetCurrentDirectory(), model.File.FileName));
+			await model.File.CopyToAsync(fileStream);
+			return Ok();
 		}
 	}
 }

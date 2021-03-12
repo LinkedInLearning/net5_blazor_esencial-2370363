@@ -1,9 +1,12 @@
 ﻿using Blazored.LocalStorage;
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Logging;
 
 using StoriesLibrary.Client.Entities;
+using StoriesLibrary.Client.Services;
+using StoriesLibrary.Shared;
 
 using System;
 using System.Collections.Generic;
@@ -25,12 +28,17 @@ namespace StoriesLibrary.Client.Pages.Stories
 
 		[Inject]
 		private ILocalStorageService localStorageService { get; set; }
-		
-		private int percentage;
+
+		[Inject]
+		private IStoriesService storiesService { get; set; }
+
+		private bool storySaved= false;
 
 		private Timer timer;
 
-		private string storyText;
+		private Story model = new Story();
+
+		private InputFileChangeEventArgs fileInfo;
 
 		[Parameter]
 		public FormMode Mode { get; set; }
@@ -42,7 +50,7 @@ namespace StoriesLibrary.Client.Pages.Stories
 				var storedText = await localStorageService.ContainKeyAsync("storyText") ? await localStorageService.GetItemAsync<string>("storyText") : null;
 				if (!string.IsNullOrWhiteSpace(storedText))
 				{
-					storyText = storedText;
+					model.Text = storedText;
 					StateHasChanged();
 				}
 				timer = new Timer { Interval = 5000 };
@@ -51,6 +59,19 @@ namespace StoriesLibrary.Client.Pages.Stories
 			}
 		}
 
+		private async Task InputFile_Change(InputFileChangeEventArgs e)
+		{
+			fileInfo = e;
+		}
+
+		private async Task SaveStory()
+		{
+			model.Author = "Juanjo Montiel";
+			await storiesService.AddStoryAsync(model, fileInfo.File);
+			storySaved = true;
+		}
+
+
 		private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
 		{
 			await this.InvokeAsync(SaveStoryTextInStorage);
@@ -58,13 +79,9 @@ namespace StoriesLibrary.Client.Pages.Stories
 
 		private async Task SaveStoryTextInStorage()
 		{
-			await localStorageService.SetItemAsync("storyText", storyText);
+			await localStorageService.SetItemAsync("storyText", model.Text);
 		}
 
-		private void FillingPercentageChanged(FillingPercentageChangedEventArgs e)
-		{
-			percentage = e.FillingPercentage;
-		}
 
 		public void Dispose()
 		{

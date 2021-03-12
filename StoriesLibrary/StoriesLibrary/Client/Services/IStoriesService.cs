@@ -1,4 +1,6 @@
-﻿using StoriesLibrary.Shared;
+﻿using Microsoft.AspNetCore.Components.Forms;
+
+using StoriesLibrary.Shared;
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ namespace StoriesLibrary.Client.Services
 	{
 		Task<List<Story>> GetNoveltiesAsync(StoriesService.NoveltiesScope scope);
 		Task<List<Story>> GetAllAsync();
+		Task AddStoryAsync(Story story, IBrowserFile file);
 
 	}
 }
