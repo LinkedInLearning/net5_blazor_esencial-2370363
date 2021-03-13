@@ -1,0 +1,10 @@
+﻿@using StoriesLibrary.Extensions
+@if (Story == null)
+{
+	<p>Cargando historia...</p>
+}
+<h2>Detalles de &quot;@Story.Title&quot;, de @Story.Author</h2>
+<p>Publicado el @Story.PublishedDate.ToString("dd/MM/yyyy HH:mm").</p>
+<article>
+	@((MarkupString)Story.Text.ConvertToHtml())
+</article>

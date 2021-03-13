@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-using StoriesLibrary.Shared;
+using StoriesLibrary.Entities;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace StoriesLibrary.Server.Models
+namespace StoriesLibrary.Models
 {
 	public class UPloadStoryModel : Story
 	{

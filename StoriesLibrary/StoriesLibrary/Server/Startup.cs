@@ -1,16 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using StoriesLibrary.Server.Services;
+using Blazored.LocalStorage;
+using StoriesLibrary.Data;
 
-using System.Linq;
-
-namespace StoriesLibrary.Server
+namespace StoriesLibrary
 {
 	public class Startup
 	{
@@ -25,12 +23,15 @@ namespace StoriesLibrary.Server
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
-
-			services.AddControllersWithViews();
 			services.AddRazorPages();
-			services.AddScoped<IStoriesService, StoriesService>();
+			services.AddServerSideBlazor();
+			services.AddControllersWithViews();
+			services.AddBlazoredLocalStorage();
+			services.AddDbContext<StoriesContext>(builder =>
+			{
+				builder.UseSqlite(Configuration.GetConnectionString("SqliteConnection"));
+			});
 		}
-
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
@@ -47,16 +48,14 @@ namespace StoriesLibrary.Server
 			}
 
 			app.UseHttpsRedirection();
-			app.UseBlazorFrameworkFiles();
 			app.UseStaticFiles();
 
 			app.UseRouting();
 
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapRazorPages();
-				endpoints.MapControllers();
-				endpoints.MapFallbackToFile("index.html");
+				endpoints.MapBlazorHub();
+				endpoints.MapFallbackToPage("/_Host");
 			});
 		}
 	}

@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesLibrary.Server", "StoriesLibrary\Server\StoriesLibrary.Server.csproj", "{0FCB632A-962D-4771-BBFB-90AEDE0D70A0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesLibrary.Client", "StoriesLibrary\Client\StoriesLibrary.Client.csproj", "{30B79034-6601-4A95-AB91-17956B2CA4F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesLibrary", "StoriesLibrary\Server\StoriesLibrary.csproj", "{0FCB632A-962D-4771-BBFB-90AEDE0D70A0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesLibrary.Shared", "StoriesLibrary\Shared\StoriesLibrary.Shared.csproj", "{88E0CC9C-7810-47CD-98E7-7934324B4B64}"
 EndProject
@@ -21,10 +19,6 @@ Global
 		{0FCB632A-962D-4771-BBFB-90AEDE0D70A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FCB632A-962D-4771-BBFB-90AEDE0D70A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FCB632A-962D-4771-BBFB-90AEDE0D70A0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{30B79034-6601-4A95-AB91-17956B2CA4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30B79034-6601-4A95-AB91-17956B2CA4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30B79034-6601-4A95-AB91-17956B2CA4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30B79034-6601-4A95-AB91-17956B2CA4F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{88E0CC9C-7810-47CD-98E7-7934324B4B64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{88E0CC9C-7810-47CD-98E7-7934324B4B64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88E0CC9C-7810-47CD-98E7-7934324B4B64}.Release|Any CPU.ActiveCfg = Release|Any CPU

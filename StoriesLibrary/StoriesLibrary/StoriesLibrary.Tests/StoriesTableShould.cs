@@ -1,20 +1,14 @@
 ﻿using Bunit;
-using Bunit.Rendering;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.JSInterop;
 
-using Moq;
-
-using StoriesLibrary.Client.Components;
-using StoriesLibrary.Client.Config;
-using StoriesLibrary.Shared;
+using StoriesLibrary.Components;
+using StoriesLibrary.Config;
+using StoriesLibrary.Entities;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 using Xunit;
 
