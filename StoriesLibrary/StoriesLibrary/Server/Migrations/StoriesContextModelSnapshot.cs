@@ -2,23 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoriesLibrary.Data;
 
 namespace StoriesLibrary.Migrations
 {
     [DbContext(typeof(StoriesContext))]
-    [Migration("20210313090609_InitialMigration")]
-    partial class InitialMigration
+    partial class StoriesContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.4");
 
-            modelBuilder.Entity("StoriesLibrary.Shared.Story", b =>
+            modelBuilder.Entity("StoriesLibrary.Entities.Story", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,11 +32,14 @@ namespace StoriesLibrary.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Mp3FileName")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("PublishedDate")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -60,6 +61,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Eva Artés",
                             Category = "terror",
                             PublishedDate = new DateTime(2021, 2, 28, 13, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Los ángulos tienen dientes"
                         },
@@ -69,6 +71,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Raquel Sastre",
                             Category = "novela",
                             PublishedDate = new DateTime(2021, 2, 28, 14, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "La gasolinera"
                         },
@@ -78,6 +81,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Andrés López",
                             Category = "terror",
                             PublishedDate = new DateTime(2021, 2, 28, 15, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Dejad que los niños se acerquen a mí"
                         },
@@ -87,6 +91,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Lucía Castillo",
                             Category = "ciencia ficción",
                             PublishedDate = new DateTime(2021, 2, 28, 16, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "El vuelo al fin del mundo"
                         },
@@ -96,6 +101,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Diego de Salazar",
                             Category = "novela",
                             PublishedDate = new DateTime(2021, 2, 28, 17, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "El tocador de la abuela"
                         },
@@ -105,6 +111,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Daniela Rubio",
                             Category = "novela",
                             PublishedDate = new DateTime(2021, 2, 28, 18, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Las cerillas mojadas no sirven para nada"
                         },
@@ -114,6 +121,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Ricardo Allen",
                             Category = "ciencia ficción",
                             PublishedDate = new DateTime(2021, 2, 28, 19, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Sacando las castañas del fuego"
                         },
@@ -123,6 +131,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Núria Azanza",
                             Category = "novela histórica",
                             PublishedDate = new DateTime(2021, 2, 28, 20, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Los árboles invisibles"
                         },
@@ -132,6 +141,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Blanca Romero",
                             Category = "novela",
                             PublishedDate = new DateTime(2021, 2, 28, 21, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Dirección prohibida"
                         },
@@ -141,6 +151,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Alfonso Tirado",
                             Category = "romántica",
                             PublishedDate = new DateTime(2021, 2, 28, 22, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "El olor de las margaritas"
                         },
@@ -150,6 +161,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Alejandro Carbonell",
                             Category = "ciencia ficción",
                             PublishedDate = new DateTime(2021, 2, 28, 23, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Planetas sin vida"
                         },
@@ -159,6 +171,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Ignacio Aguado",
                             Category = "ciencia ficción",
                             PublishedDate = new DateTime(2021, 2, 28, 0, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "La vacuna"
                         },
@@ -168,6 +181,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Cristóbal Lafuente",
                             Category = "Thriller",
                             PublishedDate = new DateTime(2021, 2, 28, 1, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "El master"
                         },
@@ -177,6 +191,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Eduardo Préscoli",
                             Category = "romántica",
                             PublishedDate = new DateTime(2021, 2, 28, 2, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "El desorden de tu ausencia"
                         },
@@ -186,6 +201,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Gloria Onrubia",
                             Category = "ciencia ficción",
                             PublishedDate = new DateTime(2021, 2, 28, 3, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Los amigos que fuimos"
                         },
@@ -195,6 +211,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Elena Carrión",
                             Category = "ciencia ficción",
                             PublishedDate = new DateTime(2021, 2, 28, 4, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Saltando charcos"
                         },
@@ -204,6 +221,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Jesús Palomo",
                             Category = "literatura",
                             PublishedDate = new DateTime(2021, 2, 28, 5, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Las garras del hambre"
                         },
@@ -213,6 +231,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Daniel Martín",
                             Category = "Thriller",
                             PublishedDate = new DateTime(2021, 2, 28, 5, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "El barco de papel"
                         },
@@ -222,6 +241,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Rosa Ramos",
                             Category = "ciencia ficción",
                             PublishedDate = new DateTime(2021, 2, 28, 6, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Los gatos también ladran"
                         },
@@ -231,6 +251,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Roberto Masip",
                             Category = "novela",
                             PublishedDate = new DateTime(2021, 2, 28, 7, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "Durmiendo"
                         },
@@ -240,6 +261,7 @@ namespace StoriesLibrary.Migrations
                             Author = "Juan María Martín",
                             Category = "ciencia ficción",
                             PublishedDate = new DateTime(2021, 2, 28, 8, 22, 51, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
                             Text = "Línea 1\r\nLínea 2",
                             Title = "La mirada vacía"
                         });

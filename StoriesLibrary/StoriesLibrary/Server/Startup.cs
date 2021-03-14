@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 using Blazored.LocalStorage;
 using StoriesLibrary.Data;
+using StoriesLibrary.Config;
 
 namespace StoriesLibrary
 {
@@ -27,9 +28,23 @@ namespace StoriesLibrary
 			services.AddServerSideBlazor();
 			services.AddControllersWithViews();
 			services.AddBlazoredLocalStorage();
-			services.AddDbContext<StoriesContext>(builder =>
+			services.AddDbContextFactory<StoriesContext>(builder =>
 			{
-				builder.UseSqlite(Configuration.GetConnectionString("SqliteConnection"));
+				builder.UseSqlite(Configuration.GetConnectionString("SqliteConnection"))
+				.EnableSensitiveDataLogging(true);
+			});
+			services.AddSingleton(typeof(PaginationConfig), (ServiceProvider) =>
+				{
+					var paginationConfig = new PaginationConfig();
+					this.Configuration.GetSection("Pagination").Bind(paginationConfig);
+					return paginationConfig;
+				});
+
+			services.AddSingleton(typeof(StoriesStorageConfig), (ServiceProvider) =>
+			{
+				var storageConfig = new StoriesStorageConfig();
+				this.Configuration.GetSection("StoriesStorage").Bind(storageConfig);
+				return storageConfig;
 			});
 		}
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +69,7 @@ namespace StoriesLibrary
 
 			app.UseEndpoints(endpoints =>
 			{
+				endpoints.MapControllers();
 				endpoints.MapBlazorHub();
 				endpoints.MapFallbackToPage("/_Host");
 			});

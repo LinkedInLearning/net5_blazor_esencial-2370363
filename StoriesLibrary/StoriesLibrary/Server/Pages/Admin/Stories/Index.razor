@@ -18,7 +18,7 @@
 			<td>@data.Story.Author</td>
 			<td>@data.Story.Category</td>
 			<td><a href="#" @onclick="@(() => EditStory(data.Story))" @onclick:preventDefault="true" aria-label="Editar @data.Story.Title, de @data.Story.Author">Editar</a></td>
-			<td><a href="#" @onclick="@(() => DeleteStory(data.Story))" @onclick:preventDefault="true" aria-label="Borrar @data.Story.Title, de @data.Story.Author">Borrar</a></td>
+			<td><a href="#" @onclick="@(async () => await DeleteStory(data.Story))" @onclick:preventDefault="true" aria-label="Borrar @data.Story.Title, de @data.Story.Author">Borrar</a></td>
 		</tr>
 	</RowTemplate>
 </StoriesTable>

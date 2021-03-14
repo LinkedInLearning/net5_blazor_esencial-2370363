@@ -1,0 +1,15 @@
+﻿<dl>
+	@foreach (var property in propertiesToPrint)
+	{
+		<dt>@property.Value:</dt>
+		@if (property.Key == "Text")
+		{
+			var markup = (MarkupString)Value.GetValue<string>("Text");
+			<dd>@markup</dd>
+		}
+		else
+		{
+			<dd>@(Value.GetValue<string>(property.Key))</dd>
+		}
+	}
+</dl>

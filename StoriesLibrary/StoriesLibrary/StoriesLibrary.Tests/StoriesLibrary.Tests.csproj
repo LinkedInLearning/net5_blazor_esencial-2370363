@@ -23,7 +23,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Server\StoriesLibrary.csproj" />
-	  <ProjectReference Include="..\Shared\StoriesLibrary.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

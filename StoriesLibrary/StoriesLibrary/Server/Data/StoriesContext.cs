@@ -25,7 +25,7 @@ namespace StoriesLibrary.Data
 			s.Property(p => p.Author).IsRequired().HasMaxLength(250);
 			s.Property(p => p.Category).IsRequired().HasMaxLength(50);
 			s.Property(p => p.Text).IsRequired();
-			s.Property(p => p.Text).IsConcurrencyToken();
+			s.Property(p => p.RowVersion).IsRowVersion().HasDefaultValue(0);
 			SeedStories(s);
 		}
 
