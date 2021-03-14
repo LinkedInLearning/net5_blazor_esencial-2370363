@@ -8,6 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Blazored.LocalStorage;
 using StoriesLibrary.Data;
 using StoriesLibrary.Config;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Components.Authorization;
+using StoriesLibrary.Areas.Identity;
 
 namespace StoriesLibrary
 {
@@ -30,9 +33,22 @@ namespace StoriesLibrary
 			services.AddBlazoredLocalStorage();
 			services.AddDbContextFactory<StoriesContext>(builder =>
 			{
-				builder.UseSqlite(Configuration.GetConnectionString("SqliteConnection"))
+				builder.UseSqlServer(
+					Configuration.GetConnectionString("DefaultConnection"))
 				.EnableSensitiveDataLogging(true);
 			});
+			services.AddDbContext<StoriesContext>(builder =>
+			{
+				builder.UseSqlServer(
+					Configuration.GetConnectionString("DefaultConnection"))
+				.EnableSensitiveDataLogging(true);
+			});
+
+			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+				.AddEntityFrameworkStores<StoriesContext>();
+			services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+			services.AddDatabaseDeveloperPageExceptionFilter();
+
 			services.AddSingleton(typeof(PaginationConfig), (ServiceProvider) =>
 				{
 					var paginationConfig = new PaginationConfig();
@@ -53,7 +69,7 @@ namespace StoriesLibrary
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-				app.UseWebAssemblyDebugging();
+				app.UseMigrationsEndPoint();
 			}
 			else
 			{
@@ -66,6 +82,9 @@ namespace StoriesLibrary
 			app.UseStaticFiles();
 
 			app.UseRouting();
+
+			app.UseAuthentication();
+			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 			{

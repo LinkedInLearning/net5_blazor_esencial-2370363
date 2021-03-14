@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using StoriesLibrary.Entities;
@@ -7,12 +9,12 @@ using System;
 
 namespace StoriesLibrary.Data
 {
-	public class StoriesContext : DbContext
+	public class StoriesContext : IdentityDbContext
 	{
 
 		public DbSet<Story> Stories { get; set; }
 
-		public StoriesContext(DbContextOptions options) : base(options)
+		public StoriesContext(DbContextOptions<StoriesContext> options) : base(options)
 		{
 		}
 
