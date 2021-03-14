@@ -1,11 +1,13 @@
 ﻿using Blazored.LocalStorage;
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Logging;
 
 using StoriesLibrary.Client.Entities;
 using StoriesLibrary.Client.Services;
+using StoriesLibrary.Clients.Models;
 using StoriesLibrary.Shared;
 
 using System;
@@ -14,7 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace StoriesLibrary.Client.Pages.Stories
+namespace StoriesLibrary.Client.Components
 {
 	public partial class AddOrEdit : IDisposable
 	{
@@ -32,22 +34,39 @@ namespace StoriesLibrary.Client.Pages.Stories
 		[Inject]
 		private IStoriesService storiesService { get; set; }
 
+		[Inject]
+		private NavigationManager navigationManager { get; set; }
+
+		[CascadingParameter]
+		private Task<AuthenticationState> authenticationStateTask { get; set; }
+
 		private bool storySaved= false;
 
 		private Timer timer;
 
-		private Story model = new Story();
+		private StoryModel model = new StoryModel();
 
-		private InputFileChangeEventArgs fileInfo;
+		private EditContext editContext;
+
+		private string storageKey;
+		
+
+		private CustomValidator customValidator;
 
 		[Parameter]
 		public FormMode Mode { get; set; }
 
+		protected override void OnInitialized()
+		{
+			storageKey = new Uri(navigationManager.Uri).AbsolutePath.Replace("/", "_") + "_storyText";
+			editContext = new EditContext(model);
+		}
+		
 		protected override async Task OnAfterRenderAsync(bool firstRender)
 		{
 			if (firstRender)
 			{
-				var storedText = await localStorageService.ContainKeyAsync("storyText") ? await localStorageService.GetItemAsync<string>("storyText") : null;
+				var storedText = await localStorageService.ContainKeyAsync(storageKey) ? await localStorageService.GetItemAsync<string>(storageKey) : null;
 				if (!string.IsNullOrWhiteSpace(storedText))
 				{
 					model.Text = storedText;
@@ -61,13 +80,22 @@ namespace StoriesLibrary.Client.Pages.Stories
 
 		private async Task InputFile_Change(InputFileChangeEventArgs e)
 		{
-			fileInfo = e;
+			model.Mp3File = e.File;
 		}
 
 		private async Task SaveStory()
 		{
-			model.Author = "Juanjo Montiel";
-			await storiesService.AddStoryAsync(model, fileInfo.File);
+			customValidator.ClearErrors();
+			if (model.Mp3File != null)
+			{
+				if (model.Mp3File.ContentType != "audio/mpeg")
+				{
+					customValidator.DisplayErrors(new Dictionary<string, List<string>> { { "txtFile", new List<string> { "El archivo introducido parece no ser un fichero MP3 válido." } } });
+					return;
+				}
+			}
+			var authenticationState = await authenticationStateTask;
+			await storiesService.AddStoryAsync(new Story { Title = model.Title, Author = authenticationState?.User?.Identity?.Name ?? "desconocido", PublishedDate = DateTime.UtcNow, Category = model.Category, Text = model.Text }, model.Mp3File);
 			storySaved = true;
 		}
 
@@ -79,7 +107,7 @@ namespace StoriesLibrary.Client.Pages.Stories
 
 		private async Task SaveStoryTextInStorage()
 		{
-			await localStorageService.SetItemAsync("storyText", model.Text);
+			await localStorageService.SetItemAsync(storageKey, model.Text);
 		}
 
 

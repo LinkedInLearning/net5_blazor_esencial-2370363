@@ -1,0 +1,35 @@
+﻿@if (storySaved)
+{
+	<p class="info">Historia @(Mode == FormMode.Add ? "añadida" : "editada") satisfactoriamente.</p>
+}
+else
+{
+	<EditForm EditContext="editContext" OnValidSubmit="SaveStory">
+		<div role="alert">
+			<DataAnnotationsValidator />
+			<CustomValidator @ref="customValidator" />
+			<ValidationSummary />
+		</div>
+
+		<div class="form-group">
+			<label for="txtTitle">Título (*):</label>
+			<InputText id="txtTitle" class="form-control" @bind-Value="model.Title" />
+			<ValidationMessage For="@(() => model.Title)" />
+		</div>
+		<div class="form-group">
+			<label for="txtCategory">Categoría (*):</label>
+			<InputText id="txtCategory" class="form-control" @bind-Value="model.Category" />
+			<ValidationMessage For="@(() => model.Category)" />
+		</div>
+		<div class="form-group">
+			<label for="txtText">:</label>
+			<InputTextArea id="txtText" @bind-Value="model.Text" />
+		</div>
+		<div class="form-group">
+			<label for="txtFile">Archivo de audio MP3 de tu historia:</label>
+			<InputFile id="txtFile" OnChange="InputFile_Change" />
+			<ValidationMessage For="@(() => model.Mp3File)" />
+		</div>
+		<button type="submit" class="btn-primary">@(Mode == FormMode.Add ? "Añadir historia" : "Editar historia")</button>
+	</EditForm>
+}
