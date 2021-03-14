@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
 
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace StoriesLibrary.Client.Pages
 
 		[CascadingParameter(Name = "numberOfSubscribers")]
 		private int numberOfStories { get; set; }
+[Inject]
+		private IStringLocalizer<Index> localizer { get; set; }
 
 	}
 }

@@ -1,0 +1,17 @@
+﻿<nav aria-label="Menú de idiomas">
+	<ul>
+		@foreach (var culture in supportedCultures)
+		{
+			<li>
+				@if ((currentCulture.Name == culture.Name))
+				{
+					@culture.NativeName
+				}
+				else
+				{
+					<a href="#" @onclick="@(async () => await SetCultureAsync(culture.Name))" @onclick:preventDefault="true">@culture.NativeName</a>
+				}
+			</li>
+		}
+	</ul>
+</nav>
