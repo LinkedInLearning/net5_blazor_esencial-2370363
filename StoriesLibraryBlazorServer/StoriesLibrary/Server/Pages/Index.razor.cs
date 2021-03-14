@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,9 @@ namespace StoriesLibrary.Pages
 	{
 
 		[CascadingParameter(Name = "numberOfSubscribers")]
-		private int numberOfStories { get; set; }
+		private int numberOfSubscribers { get; set; }
+[Inject]
+		private IStringLocalizer<Index> localizer { get; set; }
 
 	}
 }

@@ -1,0 +1,18 @@
+﻿<nav aria-label="@localizer["Menú de idiomas"]">
+	<ul>
+		@foreach (var culture in localizationOptions.SupportedCultures)
+		{
+			<li>
+				@if ((currentCulture.Name == culture.Name))
+				{
+					@culture.NativeName
+				}
+				else
+				{
+					var uri = navigationManager.ToAbsoluteUri($"Culture/SetCulture?culture={culture.Name}&redirectUri={System.Web.HttpUtility.UrlEncode(new Uri(navigationManager.Uri).PathAndQuery)}");
+					<a href="@uri">@culture.NativeName</a>
+				}
+			</li>
+		}
+	</ul>
+</nav>

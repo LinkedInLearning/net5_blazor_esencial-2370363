@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Localization
+@using System.Globalization 
 @using StoriesLibrary
 @namespace StoriesLibrary.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -19,6 +21,14 @@
 	<link href="StoriesLibrary.styles.css" rel="stylesheet" />
 </head>
 <body>
+	@{
+		this.HttpContext.Response.Cookies.Append(
+			CookieRequestCultureProvider.DefaultCookieName,
+			CookieRequestCultureProvider.MakeCookieValue(
+				new RequestCulture(
+					CultureInfo.CurrentCulture,
+					CultureInfo.CurrentUICulture)));
+	}
 	<component type="typeof(App)" render-mode="ServerPrerendered" />
 
 	<div id="blazor-error-ui">
