@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 using StoriesLibrary.Server.Models;
 using StoriesLibrary.Server.Services;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace StoriesLibrary.Server.Controllers
 {
 	[ApiController]
+	[Authorize]
 	[Route("/api/[controller]")]
 	public class StoriesController : Controller
 	{

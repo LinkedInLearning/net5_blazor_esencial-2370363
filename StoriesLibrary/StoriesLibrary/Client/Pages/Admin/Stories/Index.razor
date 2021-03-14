@@ -1,28 +1,35 @@
 ﻿@page "/admin/stories/"
 @page "/admin/stories/index"
 <h2>Listado de historias</h2>
-<StoriesTable Caption="Lista de historias dadas de alta en la aplicación" Stories="stories" OnStorySelect="LoadStoryDetails">
-	<HeaderTemplate>
-		<thead>
-			<tr>
-				<th>Título</th>
-				<th>Autor</th>
-				<th>Categoría</th>
-				<th colspan="2">Acciones</th>
-			</tr>
-		</thead>
-	</HeaderTemplate>
-	<RowTemplate Context="data">
-		<tr>
-			<td><a href="#" @onclick="@(() => data.Table.SelectStory(data.Story))" @onclick:preventDefault="true">@data.Story.Title</a></td>
-			<td>@data.Story.Author</td>
-			<td>@data.Story.Category</td>
-			<td><a href="#" @onclick="@(() => EditStory(data.Story))" @onclick:preventDefault="true" aria-label="Editar @data.Story.Title, de @data.Story.Author">Editar</a></td>
-			<td><a href="#" @onclick="@(() => DeleteStory(data.Story))" @onclick:preventDefault="true" aria-label="Borrar @data.Story.Title, de @data.Story.Author">Borrar</a></td>
-		</tr>
-	</RowTemplate>
-</StoriesTable>
-@if (selectedStory != null)
+@if (stories is null)
 {
-	<StoryDetails Story="selectedStory" />
+	<p class="bg-info">Cargando historias...</p>
+}
+else
+{
+	<StoriesTable Caption="Lista de historias dadas de alta en la aplicación" Stories="stories" OnStorySelect="LoadStoryDetails">
+		<HeaderTemplate>
+			<thead>
+				<tr>
+					<th>Título</th>
+					<th>Autor</th>
+					<th>Categoría</th>
+					<th colspan="2">Acciones</th>
+				</tr>
+			</thead>
+		</HeaderTemplate>
+		<RowTemplate Context="data">
+			<tr>
+				<td><a href="#" @onclick="@(() => data.Table.SelectStory(data.Story))" @onclick:preventDefault="true">@data.Story.Title</a></td>
+				<td>@data.Story.Author</td>
+				<td>@data.Story.Category</td>
+				<td><a href="#" @onclick="@(() => EditStory(data.Story))" @onclick:preventDefault="true" aria-label="Editar @data.Story.Title, de @data.Story.Author">Editar</a></td>
+				<td><a href="#" @onclick="@(() => DeleteStory(data.Story))" @onclick:preventDefault="true" aria-label="Borrar @data.Story.Title, de @data.Story.Author">Borrar</a></td>
+			</tr>
+		</RowTemplate>
+	</StoriesTable>
+	@if (selectedStory != null)
+	{
+		<StoryDetails Story="selectedStory" />
+	}
 }

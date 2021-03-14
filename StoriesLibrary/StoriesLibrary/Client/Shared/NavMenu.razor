@@ -1,4 +1,6 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@using Microsoft.AspNetCore.Components.Authorization
+
+<div class="top-row pl-4 navbar navbar-dark">
 	<a class="navbar-brand" href="">StoriesLibrary</a>
 	<button class="navbar-toggler" @onclick="ToggleNavMenu" aria-label="@((collapseNavMenu ? "Expandir" : "Contraer") + " el menú de navegación")" aria-expanded="@(!collapseNavMenu ? "true" : "false")">
 		<span class="navbar-toggler-icon" aria-hidden="true"></span>
@@ -13,21 +15,28 @@
 					<span class="oi oi-home" aria-hidden="true"></span>Inicio
 				</NavLink>
 			</li>
-			<li class="nav-item px-3">
-				<NavLink class="nav-link" href="admin/stories">
-					Administrar historias
-				</NavLink>
-			</li>
-			<li class="nav-item px-3">
-				<NavLink class="nav-link" href="stories/add">
-					¡Añade tu historia!
-				</NavLink>
-			</li>
-			<li class="nav-item px-3">
-				<NavLink class="nav-link" href="novelties/today">
-					Novedades
-				</NavLink>
-			</li>
+			<AuthorizeView>
+				<Authorized>
+					<li class="nav-item px-3">
+						<NavLink class="nav-link" href="admin/stories">
+							Administrar historias
+						</NavLink>
+					</li>
+					<li class="nav-item px-3">
+						<NavLink class="nav-link" href="stories/add">
+							¡Añade tu historia!
+						</NavLink>
+					</li>
+					<li class="nav-item px-3">
+						<NavLink class="nav-link" href="novelties/today">
+							Novedades
+						</NavLink>
+					</li>
+				</Authorized>
+				<NotAuthorized>
+					<li>Inicia sesión, hazme el favor.</li>
+				</NotAuthorized>
+			</AuthorizeView>
 		</ul>
 	</nav>
 </div>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components;
 
 using StoriesLibrary.Client.Components;
 using StoriesLibrary.Client.Services;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace StoriesLibrary.Client.Pages.Admin.Stories
 {
+	[Authorize]
 	public partial class Index
 	{
 		private List<Story> stories;
