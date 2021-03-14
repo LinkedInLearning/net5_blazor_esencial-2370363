@@ -1,0 +1,24 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+	<div class="sidebar">
+		<NavMenu />
+	</div>
+
+	<div class="main">
+		<div class="top-row px-4 auth">
+			<LoginDisplay />
+		</div>
+
+		<div class="content px-4">
+			<main>
+				<CascadingValue Value="numberOfSubscribers" Name="numberOfSubscribers">
+					@Body
+				</CascadingValue>
+			</main>
+		</div>
+	</div>
+	<PageFooter>
+		<p>Esta página está desarrollada con Blazor</p>
+		</PageFooter>
+</div>

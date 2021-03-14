@@ -1,0 +1,51 @@
+﻿@if (storyNotFound)
+{
+	<p class="text-danger">No se encontró la historia con el identificador especificado.</p>
+}
+else if (storySaved)
+{
+	<p class="info">Historia @(Mode == FormMode.Add ? "añadida" : "editada") satisfactoriamente.</p>
+	<p><a href="admin/stories/">Volver a la lista de historias</a></p>
+}
+else if (this.databaseValues != null)
+{
+	<p class="info">Se ha producido un error. Mientras editabas esta página, alguien ha modificado también esta historia. Deberás decidir qué hacer con los dos cambios.</p>
+	<h2>Historia guardada durante tu edición</h2>
+	<StoryConcurrentChanges Value="databaseValues" />
+	<h2>Tu historia:</h2>
+	<StoryConcurrentChanges Value="currentValues" />
+	<h2>¿Qué deseas hacer?</h2>
+	<ul>
+		<li><button @onclick="ResolveConflictMyVersion">Usar mi versión de la historia</button></li>
+		<li><button @onclick="ResolveConflictLeaveSaved">Dejar la versión que se guardó durante mi edición</button></li>
+		<li><button @onclick="ResolveConflictEditAgain">Volver a editar la historia para resolver los conflictos</button></li>
+	</ul>
+}
+else
+{
+	if (model is null)
+	{
+		<p>Cargando historia...</p>
+	}
+	else
+	{
+
+		<div class="form-group">
+			<label for="txtTitle">Título (*)</label>
+			<input id="txtTitle" class="form-control" MaxLength="100" @bind="model.Title" @bind:event="oninput" />
+		</div>
+		<div class="form-group">
+			<label for="txtText">Texto de la historia (*)</label>
+			<textarea id="txtText" class="form-control" rows="4" @bind="model.Text" @bind:event="oninput"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="txtCategory">Categoría(*)</label>
+			<input id="txtCategory" class="form-control" MaxLength="100" @bind="model.Category" @bind:event="oninput" />
+		</div>
+		<div class="form-group">
+			<label for="txtFile">Archivo de audio (mp3) de tu historia:</label>
+			<InputFile id="txtFile" OnChange="InputFile_Change" />
+		</div>
+		<button class="btn-primary" @onclick="SaveStoryAsync">@(Mode == FormMode.Add ? "Añadir historia" : "Editar historia")</button>
+	}
+}

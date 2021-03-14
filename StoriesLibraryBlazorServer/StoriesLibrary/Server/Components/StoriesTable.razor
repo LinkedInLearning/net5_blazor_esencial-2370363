@@ -1,0 +1,74 @@
+﻿@if (Stories is null)
+{
+	<p class="text-info">Cargando historias...</p>
+}
+else
+{
+		<h3>Filtrar historias</h3>
+	<div role="search">
+		<div class="form-group">
+			<label for="txtSearch">Buscar historias:</label>
+			<input type="text" class="form-control" id="txtSearch" @bind="searchField" />
+		</div>
+		<button class="btn-primary" @onclick="PerformSearch">Buscar</button>
+		<h4 id="hRecentSearches">Búsquedas recientes</h4>
+		<div id="pnlRecentSearches" role="group" aria-labelledby="hRecentSearches">
+			<ul>
+				@foreach (var search in recentSearches)
+				{
+					<li><button @onclick="(() => SetRecentSearch(search))" aria-label="Buscar @search" disabled="@(searchField == search)">@search</button></li>
+				}
+			</ul>
+		</div>
+	</div>
+	<h3>Historias encontradas</h3>
+	<p>Según la configuración, el número de resultados tiene que ser @paginationConfig.NumberOfResults en cada página, y el listado debe mostrar @paginationConfig.PagesVisible páginas visibles.</p>
+	@if (filteredResults is null || !filteredResults.Any())
+	{
+		<p role="alert">No se encontraron resultados para el texto @textToFilter.</p>
+	}
+	else
+	{
+		<p role="alert">Se han encontrado @filteredResults.Count resultados.</p>
+		<table>
+			<caption>@captionWithFilter</caption>
+			@if (HeaderTemplate is null)
+			{
+				<thead>
+					<tr>
+						<th>Título</th>
+						<th>Autor</th>
+						<th>Fecha de publicación</th>
+						<th>Categoría</th>
+					</tr>
+				</thead>
+			}
+			else
+			{
+				@HeaderTemplate
+			}
+			<tbody>
+				<Virtualize Context="story" ItemsProvider="@LoadStories">
+					<ItemContent>
+						@if (RowTemplate is null)
+						{
+							<tr>
+								<td><a href="#" @onclick="@(() => SelectStory(story))" @onclick:preventDefault="true"> @story.Title</a></td>
+								<td>@story.Author</td>
+								<td>@story.PublishedDate.ToString("dd/MM/yyy HH:mm")</td>
+								<td>@story.Category</td>
+							</tr>
+						}
+						else
+						{
+							@RowTemplate((story, this))
+						}
+					</ItemContent>
+					<Placeholder>
+			<td colspan="@placeholderColspan">Cargando...</td>
+			</Placeholder>
+			</Virtualize>
+			</tbody>
+		</table>
+	}
+}
