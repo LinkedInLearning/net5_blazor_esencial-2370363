@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 using StoriesLibrary.Client.Config;
+using StoriesLibrary.Client.Entities;
 using StoriesLibrary.Shared;
 
 using System;
@@ -65,6 +66,7 @@ namespace StoriesLibrary.Client.Components
 					|| s.Author.Contains(textToFilter, StringComparison.InvariantCultureIgnoreCase)
 					|| s.Category.Contains(textToFilter, StringComparison.InvariantCultureIgnoreCase)).ToList();
 			}
+			AccessibilityContext.CssSelectorToFocus = "#tblResults";
 		}
 
 		private void SetRecentSearch(string text)

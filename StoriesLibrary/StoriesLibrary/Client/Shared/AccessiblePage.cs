@@ -25,6 +25,7 @@ namespace StoriesLibrary.Client.Shared
 			if (!string.IsNullOrWhiteSpace(accessibilityContext.CssSelectorToFocus))
 			{
 				await jsRuntime.InvokeVoidAsync("accessibilityFunctions.focusByQuerySelector", accessibilityContext.CssSelectorToFocus);
+				accessibilityContext.CssSelectorToFocus = null;
 			}
 			else
 			{
