@@ -1,35 +1,61 @@
-﻿@if (storySaved)
+﻿@using StoriesLibrary.Client.Models
+@if (storySaved)
 {
 	<p class="info">Historia @(Mode == FormMode.Add ? "añadida" : "editada") satisfactoriamente.</p>
 }
 else
 {
-	<EditForm EditContext="editContext" OnValidSubmit="SaveStory">
-		<div role="alert">
-			<DataAnnotationsValidator />
-			<CustomValidator @ref="customValidator" />
-			<ValidationSummary />
-		</div>
+<EditForm EditContext="editContext" OnValidSubmit="SaveStory">
+	<div role="alert">
+		<DataAnnotationsValidator />
+		<CustomValidator @ref="customValidator" />
+		<ValidationSummary />
+	</div>
 
-		<div class="form-group">
-			<label for="txtTitle">Título (*):</label>
-			<InputText id="txtTitle" class="form-control" @bind-Value="model.Title" />
-			<ValidationMessage For="@(() => model.Title)" />
-		</div>
-		<div class="form-group">
-			<label for="txtCategory">Categoría (*):</label>
-			<InputText id="txtCategory" class="form-control" @bind-Value="model.Category" />
-			<ValidationMessage For="@(() => model.Category)" />
-		</div>
-		<div class="form-group">
-			<label for="txtText">:</label>
-			<InputTextArea id="txtText" @bind-Value="model.Text" />
-		</div>
-		<div class="form-group">
-			<label for="txtFile">Archivo de audio MP3 de tu historia:</label>
-			<InputFile id="txtFile" OnChange="InputFile_Change" />
-			<ValidationMessage For="@(() => model.Mp3File)" />
-		</div>
-		<button type="submit" class="btn-primary">@(Mode == FormMode.Add ? "Añadir historia" : "Editar historia")</button>
-	</EditForm>
+	<div class="form-group">
+		<label for="txtTitle">Título (*):</label>
+		<InputText id="txtTitle" class="form-control" @bind-Value="model.Title" />
+		<ValidationMessage For="@(() => model.Title)" />
+	</div>
+	<div class="form-group">
+		<label for="ddlCategory">Categoría (*):</label>
+		<InputSelect class="form-control" id="ddlCategory" @bind-Value="model.Category">
+			<option value="">[Seleccionar]</option>
+			<option>Ciencia ficción</option>
+			<option>Novela</option>
+			<option>Romántica</option>
+			<option>Terror</option>
+		</InputSelect>
+		<ValidationMessage For="@(() => model.Category)" />
+	</div>
+	<div class="form-group">
+		<label for="txtText">Texto de la historia:</label>
+		<InputTextArea id="txtText" @bind-Value="model.Text" />
+		<ValidationMessage For="@(() => model.Text)" />
+	</div>
+	<div class="form-group">
+		<label for="txtFile">Archivo de audio MP3 de tu historia:</label>
+		<InputFile id="txtFile" OnChange="InputFile_Change" />
+		<ValidationMessage For="@(() => model.Mp3File)" />
+	</div>
+	<div class="form-group" role="radiogroup" aria-labelledby="commentsGroup">
+		<InputRadioGroup @bind-Value="model.Comments">
+			<h2 id="commentsGroup">Admitir comentarios en tu historia:</h2>
+			<ul>
+				<li><InputRadio class="form-control" id="rdNone" Value="StoryModel.CommentsType.None"></InputRadio><label for="rdNone">Sin comentarios</label></li>
+				<li><InputRadio class="form-control" id="rdOnlyRegistered" Value="StoryModel.CommentsType.OnlyRegistered"></InputRadio><label for="rdOnlyRegistered">Solo de usuarios registrados</label></li>
+				<li><InputRadio class="form-control" id="rdAll" Value="StoryModel.CommentsType.All"></InputRadio><label for="rdAll">Abiertos a todo el mundo</label></li>
+			</ul>
+		</InputRadioGroup>
+	</div>
+	<div class="form-group">
+		<InputCheckbox id="chkAllowRating" @bind-Value="model.AllowRatting"></InputCheckbox><label for="chkRating">Permitir puntuaciones</label>
+	</div>
+
+	<div class="form-group">
+		<InputCheckbox id="chkPrivacyPolicy" @bind-Value="model.AcceptPrivacyPolicy"></InputCheckbox><label for="chkPrivacyPolicy">Acepto la política de privacidad</label>
+		<ValidationMessage For="@(() => model.AcceptPrivacyPolicy)" />
+	</div>
+	<button type="submit" class="btn-primary">@(Mode == FormMode.Add ? "Añadir historia" : "Editar historia")</button>
+</EditForm>
 }

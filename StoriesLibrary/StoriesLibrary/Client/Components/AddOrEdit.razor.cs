@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 using StoriesLibrary.Client.Entities;
 using StoriesLibrary.Client.Services;
-using StoriesLibrary.Clients.Models;
+using StoriesLibrary.Client.Models;
 using StoriesLibrary.Shared;
 
 using System;
