@@ -56,7 +56,7 @@ namespace StoriesLibrary.Client.Pages.Novelties
 		protected override Task OnAfterRenderAsync(bool firstRender)
 		{
 			logger.LogInformation($"El componente se acaba de renderizar. firstRender = {firstRender}.");
-			return Task.CompletedTask;
+			return base.OnAfterRenderAsync(firstRender);
 		}
 
 		private async Task LoadStoryDetails(Story story)

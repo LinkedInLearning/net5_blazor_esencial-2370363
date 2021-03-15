@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 
+using StoriesLibrary.Client.Shared;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

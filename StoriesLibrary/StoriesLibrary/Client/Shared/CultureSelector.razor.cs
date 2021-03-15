@@ -24,7 +24,7 @@ namespace StoriesLibrary.Client.Shared
 		[Inject]
 		private ILocalStorageService localStorageService { get; set; }
 
-		private CultureInfo currentCulture => CultureInfo.DefaultThreadCurrentUICulture;
+		private CultureInfo currentCulture => CultureInfo.CurrentUICulture;
 
 		private async Task SetCultureAsync(string culture)
 		{
