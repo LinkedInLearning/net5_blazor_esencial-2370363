@@ -11,6 +11,7 @@ using StoriesLibrary.Config;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using StoriesLibrary.Areas.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace StoriesLibrary
 {
@@ -27,9 +28,22 @@ namespace StoriesLibrary
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
+			var supportedCultures = new[]
+			{
+				"es-ES",
+				"en-US"
+			};
+			var localizationOptions = new RequestLocalizationOptions();
+			localizationOptions.AddSupportedCultures(supportedCultures)
+				.AddSupportedUICultures(supportedCultures)
+				.SetDefaultCulture(supportedCultures[0]);
+			services.AddSingleton(localizationOptions);
+			services.AddLocalization(opt => opt.ResourcesPath = "Resources");
 			services.AddRazorPages();
 			services.AddServerSideBlazor();
-			services.AddControllersWithViews();
+			services.AddControllersWithViews()
+								.AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+				.AddDataAnnotationsLocalization(); ;
 			services.AddBlazoredLocalStorage();
 			services.AddDbContextFactory<StoriesContext>(builder =>
 			{
@@ -64,7 +78,7 @@ namespace StoriesLibrary
 			});
 		}
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RequestLocalizationOptions options)
 		{
 			if (env.IsDevelopment())
 			{
@@ -80,7 +94,7 @@ namespace StoriesLibrary
 
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
-
+			app.UseRequestLocalization(options);
 			app.UseRouting();
 
 			app.UseAuthentication();
